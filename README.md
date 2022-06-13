@@ -21,14 +21,14 @@ and <a href="https://developer.autodesk.com/en/docs/design-automation/v2/overvie
 
 
 ### Requirements
-* .NET Frameworks 4.5.2 or later
+* .NET Frameworks 4.7.1 or later
 * .NET Core 2.0 or later
 * A registered app on the <a href="https://developer.autodesk.com/myapps" target="_blank">Forge Developer portal</a>.
 * Building the API client library requires [Visual Studio 2015](https://www.visualstudio.com/downloads/) to be installed.
 
 
 ### Dependencies
-- [RestSharp](https://www.nuget.org/packages/RestSharp) 106.3.1 or later
+- [RestSharp](https://www.nuget.org/packages/RestSharp) 108.0.1 or later
 - [Json.NET](https://www.nuget.org/packages/Newtonsoft.Json/) 11.0.2 or later
 
 The DLLs included in the package may not be the latest version.

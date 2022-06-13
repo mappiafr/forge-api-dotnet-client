@@ -15,7 +15,7 @@
 @echo off
 
 set FORGESDK_VERSION=1.9.0
-set RESTSHARP_VERSION=106.11.7
+set RESTSHARP_VERSION=108.0.1
 set NEWTOWNSOFT_VERSION=12.0.3
 
 if "%VCINSTALLDIR%" == ""^
@@ -30,8 +30,8 @@ if not exist ".\nuget.exe"^
 ::  .\nuget.exe install Newtonsoft.Json -Version %NEWTOWNSOFT_VERSION% -OutputDirectory packages
 
 :: if not exist ".\bin" mkdir bin
-:: copy packages\Newtonsoft.Json.%NEWTOWNSOFT_VERSION%\lib\net452\Newtonsoft.Json.dll bin\Newtonsoft.Json.dll
-:: copy packages\RestSharp.%RESTSHARP_VERSION%\lib\net452\RestSharp.dll bin\RestSharp.dll
+:: copy packages\Newtonsoft.Json.%NEWTOWNSOFT_VERSION%\lib\net471\Newtonsoft.Json.dll bin\Newtonsoft.Json.dll
+:: copy packages\RestSharp.%RESTSHARP_VERSION%\lib\net471\RestSharp.dll bin\RestSharp.dll
 :: /platform:anycpu - default
 :: /debug - not default
 :: %CSCPATH%\csc /reference:bin\Newtonsoft.Json.dll;bin\RestSharp.dll /target:library /out:bin\Autodesk.Forge.dll /recurse:src\Autodesk.Forge\*.cs /doc:bin\Autodesk.Forge.xml
@@ -40,7 +40,7 @@ if not exist ".\nuget.exe"^
 
 ::%CSCPATH%\csc
 ::  -platform:anycpu 
-::  /reference:packages\Newtonsoft.Json.%NEWTOWNSOFT_VERSION%\lib\net452\Newtonsoft.Json.dll;packages\RestSharp.%RESTSHARP_VERSION%\lib\net452\RestSharp.dll
+::  /reference:packages\Newtonsoft.Json.%NEWTOWNSOFT_VERSION%\lib\net471\Newtonsoft.Json.dll;packages\RestSharp.%RESTSHARP_VERSION%\lib\net471\RestSharp.dll
 ::  /target:library
 ::  /out:src\Autodesk.Forge\bin\Release\Autodesk.Forge.dll
 ::  /recurse:src\Autodesk.Forge\*.cs

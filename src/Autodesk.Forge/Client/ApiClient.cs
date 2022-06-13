@@ -48,14 +48,14 @@ namespace Autodesk.Forge.Client {
 		/// Allows for extending request processing for <see cref="ApiClient"/> generated code.
 		/// </summary>
 		/// <param name="request">The RestSharp request object</param>
-		partial void InterceptRequest (IRestRequest request);
+		partial void InterceptRequest (RestRequest request);
 
 		/// <summary>
 		/// Allows for extending response processing for <see cref="ApiClient"/> generated code.
 		/// </summary>
 		/// <param name="request">The RestSharp request object</param>
 		/// <param name="response">The RestSharp response object</param>
-		partial void InterceptResponse (IRestRequest request, IRestResponse response);
+		partial void InterceptResponse (RestRequest request, RestResponse response);
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="ApiClient" /> class
@@ -138,7 +138,7 @@ namespace Autodesk.Forge.Client {
 
 			// add file parameter, if any
 			foreach ( var param in fileParams ) {
-				request.AddFile (param.Value.Name, param.Value.Writer, param.Value.FileName, param.Value.ContentLength, param.Value.ContentType);
+				request.AddFile(param.Value.Name, param.Value.GetFile, param.Value.FileName, param.Value.ContentType);
 			}
 
 			if ( postBody != null ) // http body (model or byte[]) parameter
@@ -180,12 +180,12 @@ namespace Autodesk.Forge.Client {
 				pathParams, contentType);
 
 			// set timeout
-			RestClient.Timeout = Configuration.Timeout;
+			request.Timeout = Configuration.Timeout;
 			// set user agent
-			RestClient.UserAgent = Configuration.UserAgent;
+			RestClient.Options.UserAgent = Configuration.UserAgent;
 
 			InterceptRequest (request);
-			var response = RestClient.Execute (request);
+			var response = RestClient.Execute(request);
 			InterceptResponse (request, response);
 
 			return (Object)response;
@@ -277,9 +277,9 @@ namespace Autodesk.Forge.Client {
 		/// <param name="response">The HTTP response.</param>
 		/// <param name="type">Object type.</param>
 		/// <returns>Object representation of the JSON string.</returns>
-		public /*object*/dynamic Deserialize (IRestResponse response, Type type, bool asType = false) {
+		public /*object*/dynamic Deserialize (RestResponse response, Type type, bool asType = false) {
 #pragma warning disable CS0618 // Type or member is obsolete
-			IList<Parameter> headers = response.Headers;
+			IReadOnlyCollection<HeaderParameter> headers = response.Headers;
 #pragma warning restore CS0618 // Type or member is obsolete
 			if ( type == typeof (byte []) ) // return byte array
 				return response.RawBytes;

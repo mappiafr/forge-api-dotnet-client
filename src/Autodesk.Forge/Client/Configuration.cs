@@ -118,12 +118,12 @@ namespace Autodesk.Forge.Client
         /// <value>Timeout.</value>
         public int Timeout
         {
-            get { return ApiClient.RestClient.Timeout; }
+            get { return ApiClient.RestClient.Options.MaxTimeout; }
 
             set
             {
                 if (ApiClient != null)
-                    ApiClient.RestClient.Timeout = value;
+                    ApiClient.RestClient.Options.MaxTimeout = value;
             }
         }
 
